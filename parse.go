@@ -66,7 +66,7 @@ func (p *Position) Skip(tokens ...*Token) (*Position, error) {
 // Until returns all the positions until reaching a certain token.
 // It includes skipped tokens in its result.
 func (p *Position) Until(tokens ...*Token) (*PositionSlice, error) {
-	var res = make([]*Position, 10)
+	// var res = make([]*Position, 10)
 
 	return nil, nil
 }
