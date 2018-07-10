@@ -17,6 +17,8 @@ type Token struct {
 	// something else, for instance if you match a string but
 	// want the contents of the Lexeme to only contain the insides
 	Transformer *func([]string) string
+
+	IsSkippable bool
 }
 
 // Position is a piece of matched text that corresponds to a Token
@@ -41,12 +43,15 @@ type Position struct {
 	next  *Position
 }
 
+// PositionSlice is a slice of positions
 type PositionSlice []*Position
 
 // Lexer reads from a Reader and outputs Lexemes.
 type Lexer struct {
 	tokens []*Token
-	skips  []*Token
 	reader io.Reader
 	buffer string
+	atEOF  bool
+	line   int
+	column int
 }

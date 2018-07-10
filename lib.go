@@ -5,15 +5,16 @@ import (
 	"strings"
 )
 
-func NewParser(input io.Reader, tokens []*Token, autoSkipTokens []*Token) (*Position, error) {
+func NewParser(input io.Reader, tokens []*Token) (*Position, error) {
 	// first build a lexer
-	var lex = Lexer{tokens, autoSkipTokens, input, ""}
+	var lex = Lexer{
+		tokens: tokens,
+		reader: input,
+	}
 
-	// then from the lexer, get the first position
-
-	return nil, nil
+	return lex.getNextPosition(nil, true)
 }
 
-func NewParserString(input string, tokens []*Token, autoSkipTokens []*Token) (*Position, error) {
-	return NewParser(strings.NewReader(input), tokens, autoSkipTokens)
+func NewParserString(input string, tokens []*Token) (*Position, error) {
+	return NewParser(strings.NewReader(input), tokens)
 }
